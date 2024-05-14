@@ -1,7 +1,7 @@
 package tp1.control.commands;
 
 import tp1.control.ExecutionResult;
-import tp1.logic.Game;
+import tp1.control.GameModel;
 import tp1.view.Messages;
 
 public class ListCommand extends NoParamsCommand {
@@ -26,7 +26,7 @@ public class ListCommand extends NoParamsCommand {
 	}
 
 	@Override
-	public ExecutionResult execute(Game game) {// throws CommandExecuteException{
+	public ExecutionResult execute(GameModel game) {// throws CommandExecuteException{
 		//System.out.println(Messages.HELP_AVAILABLE_COMMANDS);
 		System.out.println(CommandGenerator.commandList());
 		return new ExecutionResult(false);

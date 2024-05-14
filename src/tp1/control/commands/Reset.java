@@ -3,6 +3,7 @@ package tp1.control.commands;
 import java.util.List;
 
 import tp1.control.ExecutionResult;
+import tp1.control.GameModel;
 import tp1.control.InitialConfiguration;
 import tp1.logic.Game;
 import tp1.view.Messages;
@@ -36,8 +37,8 @@ public class Reset extends Command{
 	}
 
 	@Override
-	public ExecutionResult execute(Game game) {// throws CommandExecuteException {
-		game.ResetConfiguration(Conf);
+	public ExecutionResult execute(GameModel game) {// throws CommandExecuteException {
+		game.resetConfiguration(Conf);
 		return new ExecutionResult(true);
 	}
 	public boolean matchCommandName(String name) {
@@ -57,7 +58,8 @@ public class Reset extends Command{
 					iniConf = iniConf.NONE;
 				else
 					throw new CommandParseException(Messages.UNKNOWN_COMMAND);*/
-				return new Reset(InitialConfiguration.readInitialConfiguration(commandWords[1] + ".txt"));
+				//return new Reset(InitialConfiguration.readInitialConfiguration(commandWords[1] + ".txt"));
+				return new Reset(Conf = null);
 			}
 			else if(commandWords.length == 1)
 				return new Reset(Conf = null);
@@ -66,5 +68,6 @@ public class Reset extends Command{
 		}
 		else	
 			return new Reset(Conf = null);
+		return null;//Shoudn't end here
 	}
 }

@@ -20,7 +20,7 @@ public class CommandGenerator {
 		//TODO fill with your code
 	);
 
-	public static Command parse(String[] commandWords) throws CommandParseException {		
+	public static Command parse(String[] commandWords) {// throws CommandParseException {		
 		Command command = null;
 		for (Command c: availableCommands) {
 			if(c.matchCommandName(commandWords[0]))

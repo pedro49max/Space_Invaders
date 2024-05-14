@@ -1,7 +1,7 @@
 package tp1.control.commands;
 
 import tp1.control.ExecutionResult;
-import tp1.logic.Game;
+import tp1.control.GameModel;
 import tp1.view.Messages;
 
 public class ShockWaveCommand extends NoParamsCommand{
@@ -26,7 +26,7 @@ public class ShockWaveCommand extends NoParamsCommand{
 	}
 
 	@Override
-	public ExecutionResult execute(Game game) throws CommandExecuteException{
+	public ExecutionResult execute(GameModel game){// throws CommandExecuteException{
 		game.shockWaveDrop();
 		return new ExecutionResult(true);
 	}

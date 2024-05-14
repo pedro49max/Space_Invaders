@@ -1,8 +1,10 @@
 package tp1.logic;
 
+import java.util.List;
 import java.util.Random;
 
 import tp1.control.GameModel;
+import tp1.control.InitialConfiguration;
 import tp1.logic.gameobjects.GameObject;
 import tp1.logic.gameobjects.GameWorld;
 import tp1.logic.gameobjects.UCMShip;
@@ -42,10 +44,9 @@ public class Game implements GameStatus , GameModel, GameWorld{
 		container.add(player);
 	}
 
-	//CONTROL METHODS
+	//GameModel METHODS
 	
 	public boolean isFinished() {
-		// TODO fill with your code
 		return this.doExit;
 	}
 
@@ -57,8 +58,24 @@ public class Game implements GameStatus , GameModel, GameWorld{
 	    this.currentCycle++;
 	    this.container.computerActions();
 	    this.container.automaticMoves();
+	}	
+	@Override
+	public boolean move(Move move) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
+	@Override
+	public boolean shootLaser() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void resetConfiguration(List<String> Conf) {
+		// TODO Auto-generated method stub
+		
+	}
 	// TODO fill with your code
 
 	//CALLBACK METHODS
@@ -113,23 +130,4 @@ public class Game implements GameStatus , GameModel, GameWorld{
 		// TODO fill with your code
 		return 0;
 	}
-
-	@Override
-	public boolean move(Move move) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean shootLaser() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void reset() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

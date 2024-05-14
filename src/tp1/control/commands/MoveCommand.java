@@ -1,6 +1,7 @@
 package tp1.control.commands;
 
 import tp1.control.ExecutionResult;
+import tp1.control.GameModel;
 import tp1.logic.Game;
 import tp1.logic.Move;
 import tp1.view.Messages;
@@ -35,8 +36,8 @@ public class MoveCommand extends Command {
 	}
 
 	@Override
-	public ExecutionResult execute(Game game) {
-		game.moveUCMShip(move);
+	public ExecutionResult execute(GameModel game) {
+		game.move(move);
 		return new ExecutionResult(true);
 	}
 
@@ -59,15 +60,15 @@ public class MoveCommand extends Command {
 					this.move = Move.UP;
 				else if(commandWords[1].equals("down") || commandWords[1].equals("DOWN"))
 					this.move = Move.DOWN;
-				else 
-					throw new CommandParseException(Messages.UNKNOWN_COMMAND);
+				/*else 
+					throw new CommandParseException(Messages.UNKNOWN_COMMAND);*/
 				return new MoveCommand(this.move);
 			}
-			else
-				throw new CommandParseException(Messages.COMMAND_PARAMETERS_MISSING);
+			/*else
+				throw new CommandParseException(Messages.COMMAND_PARAMETERS_MISSING);*/
 		}
-		else	
-			return new NoneCommand();
+			
+		return new NoneCommand();
 	}
 	public boolean matchCommandName(String name) {
 		return super.matchCommandName(name);

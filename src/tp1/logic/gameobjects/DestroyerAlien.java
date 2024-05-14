@@ -1,50 +1,43 @@
 package tp1.logic.gameobjects;
 
 import tp1.logic.AlienManager;
-import tp1.logic.Game;
 import tp1.logic.Position;
+import tp1.view.Messages;
 
 public class DestroyerAlien extends AlienShip{
 
-	public DestroyerAlien(Game game, Position pos, AlienManager alienManager) {
-		super(game, pos, 1);
+	public DestroyerAlien(GameWorld game, Position pos, AlienManager alienManager) {
+		super(game, pos, 1, 10);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public boolean isOnPosition(Position pos) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isOnPosition(Position position) {
+		return this.pos.equals(position);
 	}
 
 	@Override
 	protected String getSymbol() {
-		// TODO Auto-generated method stub
-		return null;
+		return Messages.DESTROYER_ALIEN_SYMBOL + "[" + this.life + "]";
 	}
 
 	@Override
 	protected int getDamage() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 0;//does no damage
 	}
 
 	@Override
 	protected int getArmour() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.life;
 	}
 
 	@Override
 	public void onDelete() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void automaticMove() {
-		// TODO Auto-generated method stub
-		
+		this.pos.move(this.move);
 	}
 
 }

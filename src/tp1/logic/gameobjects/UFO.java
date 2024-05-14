@@ -1,12 +1,11 @@
 package tp1.logic.gameobjects;
 
-import tp1.logic.Game;
 import tp1.logic.Position;
 
 public class UFO extends EnemyShip{
 
-	public UFO(Game game, Position pos, int life) {
-		super(game, pos, life);
+	public UFO(GameWorld game, Position pos) {
+		super(game, pos, 1, 20);
 		// TODO Auto-generated constructor stub
 	}
 

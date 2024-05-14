@@ -1,48 +1,43 @@
 package tp1.logic.gameobjects;
 
-import tp1.logic.Game;
+import tp1.logic.Move;
 import tp1.logic.Position;
+import tp1.view.Messages;
 
 public class UCMLaser extends UCMWeapon{
 
-	public UCMLaser(Game game, Position pos) {
-		super(game, pos);
+	public UCMLaser(GameWorld game, Position pos) {
+		super(game, pos, 1);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public boolean isOnPosition(Position pos) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isOnPosition(Position position) {
+		return this.pos.equals(position);
 	}
 
 	@Override
 	protected String getSymbol() {
-		// TODO Auto-generated method stub
-		return null;
+		return Messages.LASER_SYMBOL;
 	}
 
 	@Override
 	protected int getDamage() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;//does 1 damage to 1 enemy
 	}
 
 	@Override
 	protected int getArmour() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.life;
 	}
 
 	@Override
 	public void onDelete() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void automaticMove() {
-		// TODO Auto-generated method stub
+		this.pos.move(Move.UP);
 		
 	}
 

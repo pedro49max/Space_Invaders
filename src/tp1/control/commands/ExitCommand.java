@@ -1,13 +1,14 @@
 package tp1.control.commands;
 
 import tp1.control.ExecutionResult;
+import tp1.control.GameModel;
 import tp1.logic.Game;
 import tp1.view.Messages;
 
 public class ExitCommand extends NoParamsCommand{
 		  		
 		@Override
-		public ExecutionResult execute(Game game) {
+		public ExecutionResult execute(GameModel game) {
 			game.exit();
 			return new ExecutionResult(false);
 		}

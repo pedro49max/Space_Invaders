@@ -1,49 +1,42 @@
 package tp1.logic.gameobjects;
 
-import tp1.logic.Game;
 import tp1.logic.Position;
+import tp1.view.Messages;
 
 public class ShockWave extends UCMWeapon{
 
-	public ShockWave(Game game, Position pos) {
-		super(game, pos);
+	public ShockWave(GameWorld game, Position pos) {
+		super(game, pos, 0);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public boolean isOnPosition(Position pos) {
-		// TODO Auto-generated method stub
-		return false;
+		return false;//Has no position
 	}
 
 	@Override
 	protected String getSymbol() {
-		// TODO Auto-generated method stub
-		return null;
+		return null;//Has no symbol to be displayed in the map
 	}
 
 	@Override
 	protected int getDamage() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;//1 of damage to every enemy ship
 	}
 
 	@Override
 	protected int getArmour() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 0;//can't be hit
 	}
 
 	@Override
 	public void onDelete() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void automaticMove() {
-		// TODO Auto-generated method stub
-		
+		// doesn't move	
 	}
 
 }

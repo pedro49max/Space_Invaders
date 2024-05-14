@@ -16,7 +16,7 @@ import tp1.view.Messages;
  */
 public class Controller {
 
-	private Game game;
+	private GameModel game;
 	private Scanner scanner;
 	private GamePrinter printer;
 
