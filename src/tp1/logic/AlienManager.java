@@ -6,9 +6,12 @@ public class AlienManager  {
 	
 	private Game game;
 	private int remainingAliens;
-	
+	private Level level;
 	//TODO fill with your code
-
+	public AlienManager(Game game, Level level){
+		this.game = game;
+		this.level = level;
+	}
 	public  GameObjectContainer initialize() {
 		this.remainingAliens = 0;
 		GameObjectContainer container = new GameObjectContainer();

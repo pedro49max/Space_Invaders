@@ -4,11 +4,11 @@ import tp1.logic.AlienManager;
 import tp1.logic.Game;
 import tp1.logic.Position;
 
-public class RegularAlien extends GameObject {
+public class RegularAlien extends AlienShip {
 
 	public RegularAlien(Game game, Position pos, AlienManager alienManager) {
 		// TODO fill with your code
-		super(game, pos, 0);
+		super(game, pos, 2);
 	}
 
 	@Override
