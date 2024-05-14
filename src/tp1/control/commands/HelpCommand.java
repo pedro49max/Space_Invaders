@@ -32,5 +32,7 @@ public class HelpCommand extends NoParamsCommand {
 		System.out.println(CommandGenerator.commandHelp());
 		return new ExecutionResult(false);
 	}
-
+	public boolean matchCommandName(String name) {
+		return super.matchCommandName(name);
+	}
 }

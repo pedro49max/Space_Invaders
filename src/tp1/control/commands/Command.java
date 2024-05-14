@@ -8,11 +8,13 @@ import tp1.logic.Game;
  *
  */
 public abstract class Command {
-
+	MoveCommand moveCommand;
+	NoParamsCommand noParamsCommand;
 	  protected abstract String getName();
 	  protected abstract String getShortcut();
 	  protected abstract String getDetails();
 	  protected abstract String getHelp();
+	  
 	  
 	  /**
 		 * Execute the command.
@@ -22,8 +24,8 @@ public abstract class Command {
 		 * @return {@code ExecutionResult} representing if command was successful and if board must be printed
 		 */
 	  public abstract ExecutionResult execute(Game game);	  
-	  
 	  public abstract Command parse(String[] commandWords);
+	  
 	  
 	  protected boolean matchCommandName(String name) {
 		    return getShortcut().equalsIgnoreCase(name) || 

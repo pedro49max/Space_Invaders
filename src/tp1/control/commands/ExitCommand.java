@@ -31,5 +31,7 @@ public class ExitCommand extends NoParamsCommand{
 		protected String getHelp() {
 			return Messages.COMMAND_EXIT_HELP;
 		}
-
+		public boolean matchCommandName(String name) {
+			return super.matchCommandName(name);
+		}
 	}

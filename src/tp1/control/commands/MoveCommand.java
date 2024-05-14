@@ -6,7 +6,6 @@ import tp1.logic.Move;
 import tp1.view.Messages;
 
 public class MoveCommand extends Command {
-
 	private Move move;
 
 	public MoveCommand() {}
@@ -37,15 +36,40 @@ public class MoveCommand extends Command {
 
 	@Override
 	public ExecutionResult execute(Game game) {
-		//TODO fill with your code
-		return null;
+		game.moveUCMShip(move);
+		return new ExecutionResult(true);
 	}
 
 
 	@Override
 	public Command parse(String[] commandWords) {
-        //TODO fill with your code
-	    return null;
+		if(commandWords[0].equals(this.getShortcut()) || commandWords[0].equals(this.getName())) {	
+			if(commandWords.length == 2) {
+				if(commandWords[1].equals("l") || commandWords[1].equals("left"))
+					this.move = Move.LEFT;
+				else if(commandWords[1].equals("lleft"))
+					this.move = Move.LLEFT;
+				else if(commandWords[1].equals("r") ||commandWords[1].equals("right"))
+					this.move = Move.RIGHT;
+				else if(commandWords[1].equals("rright"))
+					this.move = Move.RRIGHT;
+				else if(commandWords[1].equals("n") || commandWords[1].equals("none"))
+					this.move = Move.NONE;
+				else if(commandWords[1].equals("up") || commandWords[1].equals("UP"))
+					this.move = Move.UP;
+				else if(commandWords[1].equals("down") || commandWords[1].equals("DOWN"))
+					this.move = Move.DOWN;
+				else 
+					throw new CommandParseException(Messages.UNKNOWN_COMMAND);
+				return new MoveCommand(this.move);
+			}
+			else
+				throw new CommandParseException(Messages.COMMAND_PARAMETERS_MISSING);
+		}
+		else	
+			return new NoneCommand();
 	}
-
+	public boolean matchCommandName(String name) {
+		return super.matchCommandName(name);
+	}
 }
