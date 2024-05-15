@@ -213,6 +213,7 @@ public class Messages {
 	 * @return the formated debug message;
 	 */
 	public static final String debug(String message) {
+		System.out.println(message);
 		return Messages.DEBUG.formatted(message);
 	}
 

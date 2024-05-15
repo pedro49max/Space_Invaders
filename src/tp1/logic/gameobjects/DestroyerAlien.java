@@ -7,8 +7,7 @@ import tp1.view.Messages;
 public class DestroyerAlien extends AlienShip{
 
 	public DestroyerAlien(GameWorld game, Position pos, AlienManager alienManager) {
-		super(game, pos, 1, 10);
-		// TODO Auto-generated constructor stub
+		super(game, pos, 1, 10, alienManager);
 	}
 
 	@Override
@@ -33,6 +32,8 @@ public class DestroyerAlien extends AlienShip{
 
 	@Override
 	public void onDelete() {
+		this.alienmanager.deleteAlien(this);
+		this.game.deleteObject(this);
 	}
 
 	@Override

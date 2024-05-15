@@ -10,7 +10,7 @@ package tp1.util;
 public class MyStringUtils {
 
 	/**
-	 * Concatena una cadena consigo misma un determinado número de veces
+	 * Concatena una cadena consigo misma un determinado nï¿½mero de veces
 	 * 
 	 * @param x cadena
 	 * @param n repeticiones
@@ -29,7 +29,7 @@ public class MyStringUtils {
 	 * Centra un texto en un espacio de un determinado ancho 
 	 * 
 	 * @param texto   cadena a centrar
-	 * @param ancho   tamaño de la cadena resultado
+	 * @param ancho   tamaï¿½o de la cadena resultado
 	 * @return Una cadena en la que texto queda centrado
 	 */
 	public static String center(String texto, int ancho) {
@@ -38,12 +38,12 @@ public class MyStringUtils {
 
 	/**
 	 * Centra un texto en un espacio de un determinado ancho (el resto se rellena
-	 * con el carácter que se determine)
+	 * con el carï¿½cter que se determine)
 	 * 
 	 * @param texto   cadena a centrar
-	 * @param ancho   tamaño de la cadena resultado
-	 * @param relleno carácter con el que rellenar
-	 * @return Una cadena de tamaño ancho en la que texto queda centrado
+	 * @param ancho   tamaï¿½o de la cadena resultado
+	 * @param relleno carï¿½cter con el que rellenar
+	 * @return Una cadena de tamaï¿½o ancho en la que texto queda centrado
 	 */
 	public static String center(String texto, int ancho, char relleno) {
 		if (ancho > texto.length()) {

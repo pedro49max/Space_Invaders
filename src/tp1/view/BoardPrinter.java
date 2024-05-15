@@ -44,18 +44,18 @@ public class BoardPrinter extends GamePrinter {
 
 	@Override
 	public String toString() {
-		
 		StringBuilder str = new StringBuilder();
-	
+		
 		// Game Status
 		str.append(getInfo());
 
 		// Paint game board
 		str.append(ROW_BORDER);
-
+		
 		for (int row = 0; row < Game.DIM_Y; row++) {
 			str.append(VERTICAL_DELIMITER);
 			for (int col = 0; col < Game.DIM_X; col++) {
+
 				str.append(MyStringUtils.center(game.positionToString(col, row), CELL_SIZE));
 				str.append(VERTICAL_DELIMITER);
 			}

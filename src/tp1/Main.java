@@ -29,7 +29,6 @@ public class Main {
     public static void main(String[] args) {
         // Required to avoid issues with tests
         Locale.setDefault(new Locale("es", "ES"));
-
         if (args.length < 1 || args.length > 2) {
             usage();
         } else {
@@ -45,12 +44,11 @@ public class Main {
                         seedParam = args[1];
                         seed = Long.parseLong(seedParam);
                     }
-        
                     System.out.println(Messages.WELCOME);
         
                     System.out.println(String.format(Messages.CONFIGURED_LEVEL, level.name()));
                     System.out.println(String.format(Messages.CONFIGURED_SEED, seed));
-        
+                	
                     Game game = new Game(level, seed);
                     Scanner scanner = new Scanner(System.in);
                     Controller controller = new Controller(game, scanner);

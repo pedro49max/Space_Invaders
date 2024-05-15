@@ -12,5 +12,6 @@ public interface GameItem {
 
 	public boolean isAlive();
 	public boolean isOnPosition(Position pos);
+	public int points();
 
 }

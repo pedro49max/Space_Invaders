@@ -4,8 +4,8 @@ import tp1.logic.Position;
 
 public abstract class Ship extends GameObject{
 
-	public Ship(GameWorld game, Position pos, int life) {
-		super(game, pos, life);
+	public Ship(GameWorld game, Position pos, int life, boolean goodSide) {
+		super(game, pos, life, goodSide);
 		// TODO Auto-generated constructor stub
 	}
 

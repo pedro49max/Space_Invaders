@@ -7,6 +7,8 @@ import tp1.control.GameModel;
 import tp1.control.InitialConfiguration;
 import tp1.logic.gameobjects.GameObject;
 import tp1.logic.gameobjects.GameWorld;
+import tp1.logic.gameobjects.ShockWave;
+import tp1.logic.gameobjects.UCMLaser;
 import tp1.logic.gameobjects.UCMShip;
 
 
@@ -25,6 +27,7 @@ public class Game implements GameStatus , GameModel, GameWorld{
 	private Level level;
 	private Random rand ;
 	private boolean doExit;
+	
 	//TODO fill with your code
 
 	public Game (Level level, long seed){
@@ -56,28 +59,43 @@ public class Game implements GameStatus , GameModel, GameWorld{
 
 	public void update() {
 	    this.currentCycle++;
+	    this.alienManager.setAlienDir();
 	    this.container.computerActions();
 	    this.container.automaticMoves();
 	}	
 	@Override
 	public boolean move(Move move) {
-		// TODO Auto-generated method stub
-		return false;
+		return this.player.move(move);
 	}
 
 	@Override
 	public boolean shootLaser() {
-		// TODO Auto-generated method stub
-		return false;
+		if(this.player.getcanShot()) {
+			this.container.add(new UCMLaser(this, player));
+			return true;
+		}
+		else
+			return false;
 	}
-
+	public void shockWaveDrop() {
+		this.container.shockWave(new ShockWave(this, new Position(1,1)));
+	}
 	@Override
 	public void resetConfiguration(List<String> Conf) {
-		// TODO Auto-generated method stub
-		
+		currentCycle = 0;		
+		alienManager = new AlienManager(this, level);
+		container = alienManager.initialize();
+		player = new UCMShip(this, new Position(DIM_X / 2, DIM_Y - 1));
+		container.add(player);
+	}	
+	//GameWorld Methods
+	
+	public void deleteObject(GameObject object) {
+		this.container.remove(object);
 	}
-	// TODO fill with your code
-
+	public void receivePoints(int p) {
+		this.player.addPoints(p);
+	}
 	//CALLBACK METHODS
 	
 	public void addObject(GameObject object) {
@@ -89,22 +107,12 @@ public class Game implements GameStatus , GameModel, GameWorld{
 	//VIEW METHODS
 	
 	public String positionToString(int col, int row) {
-		return null;
-		//return container.toString(new Position(col, row));
-	}
-	
-	
-
-	@Override
-	public String infoToString() {
-		// TODO fill with your code
-		return null;
+		return this.container.positionToString(new Position(col, row));
 	}
 
 	@Override
 	public String stateToString() {
-		// TODO fill with your code
-		return null;
+		return player.State();
 	}
 
 	@Override
@@ -121,13 +129,11 @@ public class Game implements GameStatus , GameModel, GameWorld{
 
 	@Override
 	public int getCycle() {
-		// TODO fill with your code
-		return 0;
+		return this.currentCycle;
 	}
 
 	@Override
 	public int getRemainingAliens() {
-		// TODO fill with your code
-		return 0;
+		return this.alienManager.getRemainingAliens();
 	}
 }

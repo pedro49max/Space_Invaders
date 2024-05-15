@@ -1,14 +1,13 @@
 package tp1.logic.gameobjects;
 
-import tp1.logic.Move;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
 public class UCMLaser extends UCMWeapon{
-
-	public UCMLaser(GameWorld game, Position pos) {
-		super(game, pos, 1);
-		// TODO Auto-generated constructor stub
+	private UCMShip player;
+	public UCMLaser(GameWorld game, UCMShip player) {
+		super(game, player.clonePos(), 1);
+		this.player = player;
 	}
 
 	@Override
@@ -33,11 +32,13 @@ public class UCMLaser extends UCMWeapon{
 
 	@Override
 	public void onDelete() {
+		this.player.shotAgain();
+		this.game.deleteObject(this);
 	}
 
 	@Override
 	public void automaticMove() {
-		this.pos.move(Move.UP);
+		this.pos.move(this.move);//UP
 		
 	}
 

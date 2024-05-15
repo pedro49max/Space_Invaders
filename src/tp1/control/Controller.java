@@ -33,21 +33,19 @@ public class Controller {
 	 */
 	private String[] prompt() {
 		System.out.print(Messages.PROMPT);
+
 		String line = scanner.nextLine();
+
 		String[] words = line.toLowerCase().trim().split("\\s+");
-
-		System.out.println(debug(line));
-
+		
+		//System.out.println(debug(line));
 		return words;
 	}
 
 	public void run() {
-
 		printGame();
-
 		while (!game.isFinished()) {
 			String[] parameters = prompt();
-
 			Command command = CommandGenerator.parse(parameters);
 
 			if (command != null) {

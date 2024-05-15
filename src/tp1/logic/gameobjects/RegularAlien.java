@@ -8,11 +8,11 @@ public class RegularAlien extends AlienShip {
 
 	public RegularAlien(GameWorld game, Position pos, AlienManager alienManager) {
 		// TODO fill with your code
-		super(game, pos, 2, 5);
+		super(game, pos, 2, 5, alienManager);
 	}
 
 	@Override
-	public boolean isOnPosition(Position pos) {
+	public boolean isOnPosition(Position position) {
 		return this.pos.equals(position);
 	}
 
@@ -33,6 +33,8 @@ public class RegularAlien extends AlienShip {
 
 	@Override
 	public void onDelete() {
+		this.alienmanager.deleteAlien(this);
+		this.game.deleteObject(this);
 	}
 
 	@Override
