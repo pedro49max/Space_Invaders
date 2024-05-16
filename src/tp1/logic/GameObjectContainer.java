@@ -55,11 +55,20 @@ public class GameObjectContainer {
 		}
 	}
 
-	public void shockWave(ShockWave sw) {
+	public void shockWave(Game game) {
+		ShockWave sw;
+		List<GameObject> objectives = new ArrayList<>();
 		for (int i=0;i<objects.size();i++) {
 			GameObject object = objects.get(i);
+			if(!object.getGoodSide()) {
+				objectives.add(object);
+			}				
+		}
+		for(int i = 0; i < objectives.size(); i++) {
+			GameObject object = objectives.get(i);
+			sw = new ShockWave(game, object.clonePos());			
+			this.objects.add(sw);//It is going to be deleted after attacking
 			object.receiveAttack(sw);
-		//TODO fill with your code
 		}
 	}
 	public String positionToString(Position pos) {

@@ -32,6 +32,8 @@ public class ShockWave extends UCMWeapon{
 
 	@Override
 	public void onDelete() {
+		this.game.getShockwave(false);
+		this.game.deleteObject(this);
 	}
 
 	@Override

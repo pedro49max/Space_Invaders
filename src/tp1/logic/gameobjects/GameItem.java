@@ -13,5 +13,6 @@ public interface GameItem {
 	public boolean isAlive();
 	public boolean isOnPosition(Position pos);
 	public int points();
-
+	public Position clonePos();
+	public boolean getGoodSide();
 }

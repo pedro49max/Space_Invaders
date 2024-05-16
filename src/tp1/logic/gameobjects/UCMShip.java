@@ -90,6 +90,12 @@ public class UCMShip extends Ship{
 	public void shotAgain() {//when the laser gets deleted
 		this.canShot = true;
 	}
+	public boolean checkSockwave() {
+		return this.shockWave;
+	}
+	public void getShockwave(boolean get) {
+		this.shockWave = get;
+	}
 	public String State() {
 		String NEW_LINE = System.lineSeparator();
 		String state;

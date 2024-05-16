@@ -98,5 +98,10 @@ public abstract class GameObject implements GameItem {
 		else
 			return false;
 	}
-
+	public Position clonePos() {
+		return this.pos.clone();
+	}
+	public boolean getGoodSide() {
+		return this.goodSide;
+	}
 }

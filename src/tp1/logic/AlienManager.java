@@ -15,6 +15,7 @@ public class AlienManager  {
 	private int remainingAliens = 0;
 	private Level level;
 	private List<AlienShip> aliens;
+	private UFO ufo;
 	private Move dir= Move.LEFT, prevdir = Move.LEFT;
 	//TODO fill with your code
 	public AlienManager(Game game, Level level){
@@ -35,7 +36,8 @@ public class AlienManager  {
 	}
 	
 	private void initializeOvni(GameObjectContainer container) {
-		container.add(new UFO(game));
+		ufo = new UFO(game, this);
+		container.add(ufo);
 	}
 	
 	private void initializeRegularAliens (GameObjectContainer container) {
@@ -46,7 +48,6 @@ public class AlienManager  {
 				RegularAlien regular = new RegularAlien(game, position,this);
 				container.add(regular);				
 				aliens.add((AlienShip)regular);
-				this.remainingAliens++;
 			}
 		}
 	}
@@ -63,7 +64,6 @@ public class AlienManager  {
 			DestroyerAlien destroyer = new DestroyerAlien(game, position, this);
 			container.add(destroyer);
 			aliens.add(destroyer);
-			this.remainingAliens++;
 		}
 	}
 	
@@ -130,6 +130,9 @@ public class AlienManager  {
 		this.aliens.remove(alien);
 		this.remainingAliens--;
 	}
+	public void deleteUFO(UFO ufO) {
+		this.ufo = null;
+	}
 	public int getRemainingAliens() {
 		return this.remainingAliens;
 	}
@@ -146,6 +149,14 @@ public class AlienManager  {
 			}
 				
 		}
+	}
+	public void resetUFO(Random rand, GameObjectContainer container) {
+		if(this.ufo!= null && !this.ufo.getVisible()) {
+			if(rand.nextDouble() < level.getUfoFrequency())
+				this.ufo.restartPosition();
+		}
+		else if(this.ufo== null&& rand.nextDouble() < level.getUfoFrequency())
+			this.initializeOvni(container);
 	}
 	/*private void costumedInitialization(GameObjectContainer container, InitialConfiguration conf) {
 		for (String shipDescription : conf.getShipDescription()) {

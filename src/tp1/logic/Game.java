@@ -66,6 +66,7 @@ public class Game implements GameStatus , GameModel, GameWorld{
 	    this.container.computerActions();
 	    this.container.automaticMoves();
 	    this.alienManager.bombs(rand, this.container);
+	    this.alienManager.resetUFO(rand, container);
 	    this.container.computeractionsAfterMoving();//all damage makes sense to implement it after movement
 	}	
 	@Override
@@ -83,8 +84,12 @@ public class Game implements GameStatus , GameModel, GameWorld{
 			return false;
 	}
 	public void shockWaveDrop() {
-		this.container.shockWave(new ShockWave(this, new Position(1,1)));
+		if(player.checkSockwave()) {
+			this.getShockwave(false);
+			this.container.shockWave(this);			
+		}
 	}
+
 	@Override
 	public void resetConfiguration(List<String> Conf) {
 		currentCycle = 0;		
@@ -100,6 +105,10 @@ public class Game implements GameStatus , GameModel, GameWorld{
 	}
 	public void receivePoints(int p) {
 		this.player.addPoints(p);
+	}
+	@Override
+	public void getShockwave(boolean get) {
+		this.player.getShockwave(get);
 	}
 	//CALLBACK METHODS
 	
