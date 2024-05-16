@@ -2,11 +2,13 @@ package tp1.logic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import tp1.logic.gameobjects.DestroyerAlien;
 import tp1.logic.gameobjects.RegularAlien;
 import tp1.logic.gameobjects.UFO;
 import tp1.logic.gameobjects.AlienShip;
+import tp1.logic.gameobjects.Bomb;
 public class AlienManager  {
 	
 	private Game game;
@@ -66,30 +68,32 @@ public class AlienManager  {
 	}
 	
 	public void setAlienDir() {
-		boolean onBorder = this.onBorder();
-		onBorder = this.onBorder();
-		if (onBorder && (this.dir.equals(Move.LEFT)|| this.prevdir.equals(Move.LEFT))){
-			if(this.dir.equals(Move.DOWN)) {
-				this.dir = Move.RIGHT;
-				this.prevdir = Move.DOWN;
-			}			
-			else if(this.dir.equals(Move.LEFT)) {
-				this.dir = Move.DOWN;
-				this.prevdir = Move.LEFT;				
+		if(this.timeToMove()) {
+			boolean onBorder = this.onBorder();
+			onBorder = this.onBorder();
+			if (onBorder && (this.dir.equals(Move.LEFT)|| this.prevdir.equals(Move.LEFT))){
+				if(this.dir.equals(Move.DOWN)) {
+					this.dir = Move.RIGHT;
+					this.prevdir = Move.DOWN;
+				}			
+				else if(this.dir.equals(Move.LEFT)) {
+					this.dir = Move.DOWN;
+					this.prevdir = Move.LEFT;				
+				}
 			}
+			else if (onBorder && (this.dir.equals(Move.RIGHT) || this.prevdir.equals(Move.RIGHT))) {
+				if(this.dir.equals(Move.DOWN)) {
+					this.dir = Move.LEFT;
+					this.prevdir = Move.DOWN;
+				}	
+				else if (this.dir.equals(Move.RIGHT)) {
+					this.dir = Move.DOWN;
+					this.prevdir = Move.RIGHT;
+				}
+			}		
+			else
+				this.prevdir = this.dir;
 		}
-		else if (onBorder && (this.dir.equals(Move.RIGHT) || this.prevdir.equals(Move.RIGHT))) {
-			if(this.dir.equals(Move.DOWN)) {
-				this.dir = Move.LEFT;
-				this.prevdir = Move.DOWN;
-			}	
-			else if (this.dir.equals(Move.RIGHT)) {
-				this.dir = Move.DOWN;
-				this.prevdir = Move.RIGHT;
-			}
-		}		
-		else
-			this.prevdir = this.dir;
 	}	
 	private boolean onBorder() {
 		int i = 0;
@@ -103,8 +107,24 @@ public class AlienManager  {
 		}
 		return border;
 	}
+	public boolean touchGround() {
+		int i = 0;
+		boolean ground = false;
+		while(i < aliens.size() && !ground) {
+			AlienShip alien = aliens.get(i);
+			if(alien.ground())
+				ground = true;
+			else
+				i++;
+		}
+		return ground;
+	}
 	public Move getDir() {
-		return this.dir;
+		if(this.timeToMove()) {
+			return this.dir;
+		}			
+		else
+			return Move.NONE;
 	}
 	public void deleteAlien(AlienShip alien) {
 		this.aliens.remove(alien);
@@ -112,6 +132,20 @@ public class AlienManager  {
 	}
 	public int getRemainingAliens() {
 		return this.remainingAliens;
+	}
+	private boolean timeToMove() {
+		return game.getCycle()%level.getNumCycles() == 0;
+	}
+	public void bombs(Random rand, GameObjectContainer container) {
+		for(int i = 0; i < aliens.size(); i++) {
+			AlienShip alien = aliens.get(i);
+			if(alien.bomb(level, rand)) {
+				DestroyerAlien destroyer = (DestroyerAlien)alien;
+				Bomb bomb = new Bomb(this.game, destroyer.bombPosition());
+				container.add(bomb);
+			}
+				
+		}
 	}
 	/*private void costumedInitialization(GameObjectContainer container, InitialConfiguration conf) {
 		for (String shipDescription : conf.getShipDescription()) {
@@ -121,7 +155,7 @@ public class AlienManager  {
 			this.remainingAliens++;
 		}
 	}*/
-
+	
 
 
 	//TODO fill with your code

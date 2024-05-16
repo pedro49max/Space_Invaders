@@ -50,7 +50,10 @@ public class Game implements GameStatus , GameModel, GameWorld{
 	//GameModel METHODS
 	
 	public boolean isFinished() {
-		return this.doExit;
+		if(this.playerWin() || this.aliensWin() || this.doExit)
+			return true;
+		else
+			return false;
 	}
 
 	public void exit() {
@@ -62,6 +65,8 @@ public class Game implements GameStatus , GameModel, GameWorld{
 	    this.alienManager.setAlienDir();
 	    this.container.computerActions();
 	    this.container.automaticMoves();
+	    this.alienManager.bombs(rand, this.container);
+	    this.container.computeractionsAfterMoving();//all damage makes sense to implement it after movement
 	}	
 	@Override
 	public boolean move(Move move) {
@@ -117,14 +122,12 @@ public class Game implements GameStatus , GameModel, GameWorld{
 
 	@Override
 	public boolean playerWin() {
-		// TODO fill with your code
-		return false;
+		return this.alienManager.getRemainingAliens() == 0;
 	}
 
 	@Override
 	public boolean aliensWin() {
-		// TODO fill with your code
-		return false;
+		return this.alienManager.touchGround();
 	}
 
 	@Override

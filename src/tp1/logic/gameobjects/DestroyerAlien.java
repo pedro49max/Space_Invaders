@@ -1,6 +1,7 @@
 package tp1.logic.gameobjects;
 
 import tp1.logic.AlienManager;
+import tp1.logic.Move;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
@@ -39,6 +40,11 @@ public class DestroyerAlien extends AlienShip{
 	@Override
 	public void automaticMove() {
 		this.pos.move(this.move);
+	}
+	public Position bombPosition() {
+		Position bomb = this.pos.clone();
+		bomb.move(Move.DOWN);
+		return bomb;
 	}
 
 }

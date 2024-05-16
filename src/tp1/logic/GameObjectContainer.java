@@ -36,7 +36,23 @@ public class GameObjectContainer {
 			GameObject object = objects.get(i);
 			object.computerAction();
 		}
-		// TODO fill with your code
+	}
+	public void computeractionsAfterMoving() {
+		for(int i = 0; i < objects.size();i++) {//just for the attacks one to one
+			GameObject attacker = objects.get(i);
+			int j= 0;
+			boolean keepgoing = true;
+			while(j< objects.size() && keepgoing) {
+				if(j == i) {
+					j++;
+					if(j == objects.size())
+						break;
+				}
+				GameObject asulted = objects.get(j);
+				keepgoing = !attacker.performAttack(asulted);
+				j++;
+			}
+		}
 	}
 
 	public void shockWave(ShockWave sw) {
