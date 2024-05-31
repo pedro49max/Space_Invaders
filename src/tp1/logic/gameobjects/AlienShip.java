@@ -55,4 +55,24 @@ public abstract class AlienShip extends EnemyShip{
 			return false;
 	}
 	protected abstract AlienShip copy(GameWorld game, Position pos, AlienManager am);
+	public abstract String getShortSymbol();
+	@Override
+	public boolean isOnPosition(Position position) {
+		return this.pos.equals(position);
+	}
+
+	@Override
+	protected int getDamage() {
+		return 0;//does no damage
+	}
+
+	@Override
+	protected int getArmour() {
+		return this.life;
+	}
+
+	@Override
+	public void automaticMove() {
+		this.pos.move(this.move);
+	}
 }

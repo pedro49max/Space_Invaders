@@ -10,6 +10,7 @@ import tp1.logic.gameobjects.GameWorld;
 import tp1.logic.gameobjects.ShockWave;
 import tp1.logic.gameobjects.UCMLaser;
 import tp1.logic.gameobjects.UCMShip;
+import tp1.logic.gameobjects.UCMSuperLaser;
 
 
 public class Game implements GameStatus , GameModel, GameWorld{
@@ -75,9 +76,12 @@ public class Game implements GameStatus , GameModel, GameWorld{
 	}
 
 	@Override
-	public boolean shootLaser() {
+	public boolean shootLaser(boolean superLaser) {
 		if(this.player.getcanShot()) {
-			this.container.add(new UCMLaser(this, player));
+			if(!superLaser)
+				this.container.add(new UCMLaser(this, player));
+			else if(this.player.canShotSuperLaser())
+				this.container.add(new UCMSuperLaser(this, player));
 			return true;
 		}
 		else

@@ -10,40 +10,15 @@ public class DestroyerAlien extends AlienShip{
 	public DestroyerAlien(GameWorld game, Position pos, AlienManager alienManager) {
 		super(game, pos, 1, 10, alienManager);
 	}
+
 	public DestroyerAlien() {
 		super(null, null, 1, 10, null);
 	}
-
-	@Override
-	public boolean isOnPosition(Position position) {
-		return this.pos.equals(position);
-	}
-
 	@Override
 	protected String getSymbol() {
 		return " " +Messages.DESTROYER_ALIEN_SYMBOL + "[0" + this.life + "]";
 	}
 
-	@Override
-	protected int getDamage() {
-		return 0;//does no damage
-	}
-
-	@Override
-	protected int getArmour() {
-		return this.life;
-	}
-
-	@Override
-	public void onDelete() {
-		this.alienmanager.deleteAlien(this);
-		this.game.deleteObject(this);
-	}
-
-	@Override
-	public void automaticMove() {
-		this.pos.move(this.move);
-	}
 	public Position bombPosition() {
 		Position bomb = this.pos.clone();
 		bomb.move(Move.DOWN);
@@ -54,5 +29,14 @@ public class DestroyerAlien extends AlienShip{
 	protected AlienShip copy(GameWorld game, Position pos, AlienManager am) {
 		return new DestroyerAlien(game, pos, am);
 	}
-	
+	@Override
+	public String getShortSymbol() {
+		return Messages.DESTROYER_ALIEN_SYMBOL;
+	}
+
+	@Override
+	public void onDelete() {
+		this.alienmanager.deleteAlien(this);
+		this.game.deleteObject(this);
+	}
 }

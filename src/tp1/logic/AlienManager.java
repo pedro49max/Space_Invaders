@@ -7,6 +7,7 @@ import java.util.Random;
 import tp1.control.InitialConfiguration;
 import tp1.logic.gameobjects.DestroyerAlien;
 import tp1.logic.gameobjects.RegularAlien;
+import tp1.logic.gameobjects.ShipFactory;
 import tp1.logic.gameobjects.UFO;
 import tp1.logic.gameobjects.AlienShip;
 import tp1.logic.gameobjects.Bomb;
@@ -31,6 +32,19 @@ public class AlienManager  {
 			initializeOvni(container);
 			initializeRegularAliens(container);
 			initializeDestroyerAliens(container);
+		}
+		else {
+			List<String> shipDescriptions = iniConf.getShipDescription();
+	        for (String description : shipDescriptions) {
+	        	String[] parts = description.split(" ");
+	            String type = parts[0];
+	            int x = Integer.parseInt(parts[1]);
+	            int y = Integer.parseInt(parts[2]);
+	            AlienShip alien = ShipFactory.spawnAlienShip(type, game, new Position(Integer.valueOf(x), Integer.valueOf(y)), this);
+	            container.add(alien);
+	            this.aliens.add(alien);
+	            this.remainingAliens++;
+	        }
 		}
 		return container;
 	}

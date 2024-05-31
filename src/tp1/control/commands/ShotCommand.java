@@ -28,7 +28,7 @@ public class ShotCommand  extends NoParamsCommand {
 
 	@Override
 	public ExecutionResult execute(GameModel game) {// throws CommandExecuteException {
-		game.shootLaser();
+		game.shootLaser(false);
 		return new ExecutionResult(true);
 	}
 	public boolean matchCommandName(String name) {

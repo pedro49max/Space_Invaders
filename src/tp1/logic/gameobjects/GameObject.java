@@ -54,7 +54,7 @@ public abstract class GameObject implements GameItem {
 			EnemyWeapon w = (EnemyWeapon) this;
 			attack = other.receiveAttack(w);
 		}
-		else if(this.getSymbol() == Messages.LASER_SYMBOL) {
+		else if(this.getSymbol() == Messages.LASER_SYMBOL || this.getSymbol() == Messages.SUPERLASER_SYMBOL) {
 			UCMWeapon w = (UCMWeapon) this;
 			attack = other.receiveAttack(w);
 		}
@@ -66,7 +66,8 @@ public abstract class GameObject implements GameItem {
 		if(this.isOnPosition(weapon.pos)) {
 			if(this.goodSide) {
 				this.life -= weapon.getDamage();
-				this.game.deleteObject(weapon);
+				weapon.onDelete();
+				//this.game.deleteObject(weapon);
 				if(this.life <= 0) {
 					this.onDelete();
 				}
@@ -84,7 +85,8 @@ public abstract class GameObject implements GameItem {
 		if(this.isOnPosition(weapon.pos)) {
 			if(!this.goodSide) {
 				this.life -= weapon.getDamage();
-				this.game.deleteObject(weapon);
+				//this.game.deleteObject(weapon);
+				weapon.onDelete();
 				if(this.life <= 0) {
 					this.game.receivePoints(this.points());
 					this.onDelete();

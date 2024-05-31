@@ -14,23 +14,16 @@ public class RegularAlien extends AlienShip {
 		super(null, null, 2, 5, null);
 	}
 	@Override
-	public boolean isOnPosition(Position position) {
-		return this.pos.equals(position);
-	}
-
-	@Override
 	protected String getSymbol() {
 		return " " +Messages.REGULAR_ALIEN_SYMBOL + "[0" + this.life + "]";
 	}
-
 	@Override
-	protected int getDamage() {
-		return 0;//does no damage
+	protected AlienShip copy(GameWorld game, Position pos, AlienManager am) {
+		return new RegularAlien(game, pos, am);
 	}
-
 	@Override
-	protected int getArmour() {
-		return this.life;
+	public String getShortSymbol() {
+		return Messages.REGULAR_ALIEN_SYMBOL;
 	}
 
 	@Override
@@ -38,15 +31,4 @@ public class RegularAlien extends AlienShip {
 		this.alienmanager.deleteAlien(this);
 		this.game.deleteObject(this);
 	}
-
-	@Override
-	public void automaticMove() {
-		this.pos.move(this.move);
-	}
-
-	@Override
-	protected AlienShip copy(GameWorld game, Position pos, AlienManager am) {
-		return new RegularAlien(game, pos, am);
-	}
-
 }

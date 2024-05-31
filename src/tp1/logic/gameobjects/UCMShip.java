@@ -76,7 +76,15 @@ public class UCMShip extends Ship{
 		}		
 		 return false;
 	}
-	//TODO fill with your code
+	public boolean canShotSuperLaser() {
+		if(this.points>5) {
+			points -= 5;
+			return true;
+		}
+		else
+			canShot = true;
+		return false;
+	}
 
 	@Override
 	protected void setDir() {//does nothing

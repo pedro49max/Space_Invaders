@@ -7,7 +7,7 @@ import tp1.view.Messages;
 public class SuperLaserCommand extends NoParamsCommand{
 	@Override
 	public ExecutionResult execute(GameModel game) {// throws CommandExecuteException{
-		//game.shot(true);
+		game.shootLaser(true);
 		return new ExecutionResult(true);
 	}
 

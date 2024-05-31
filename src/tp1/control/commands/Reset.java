@@ -48,10 +48,12 @@ public class Reset extends Command{
 	public Command parse(String[] commandWords) {// throws CommandParseException {
 		if(commandWords[0].equals(this.getShortcut()) || commandWords[0].equals(this.getName())) {
 			if(commandWords.length == 2) {
+				
 				if(commandWords[1].equals("CONF_1") ||commandWords[1].equals("conf_1"))
 					this.iniConf = InitialConfiguration.CONF_1;
-				else if(commandWords[1].equals("CONF_2") ||commandWords[1].equals("conf_2"))
+				else if(commandWords[1].equals("CONF_2") ||commandWords[1].equals("conf_2")) {
 					this.iniConf = InitialConfiguration.CONF_2;
+				}
 				else if(commandWords[1].equals("CONF_3") ||commandWords[1].equals("conf_3"))
 					this.iniConf = InitialConfiguration.CONF_3;
 				else //if (commandWords[1].equals("NONE") ||commandWords[1].equals("none"))
