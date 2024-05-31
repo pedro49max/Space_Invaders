@@ -11,7 +11,7 @@ public class UFO extends EnemyShip{
 	protected boolean visible;
 	protected AlienManager manager;
 	public UFO(GameWorld game, AlienManager manager) {
-		super(game, new Position(Game.DIM_X - 1,0), 1, 20);
+		super(game, new Position(Game.DIM_X,0), 1, 20);
 		this.manager = manager;
 	}
 
@@ -25,7 +25,7 @@ public class UFO extends EnemyShip{
 
 	@Override
 	protected String getSymbol() {
-		return Messages.UFO_SYMBOL + "[" + this.life + "]";
+		return " " +Messages.UFO_SYMBOL + "[0" + this.life + "]";
 	}
 
 	@Override

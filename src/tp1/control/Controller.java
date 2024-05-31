@@ -38,7 +38,7 @@ public class Controller {
 
 		String[] words = line.toLowerCase().trim().split("\\s+");
 		
-		//System.out.println(debug(line));
+		System.out.println(debug(line));
 		return words;
 	}
 

@@ -10,6 +10,9 @@ public class DestroyerAlien extends AlienShip{
 	public DestroyerAlien(GameWorld game, Position pos, AlienManager alienManager) {
 		super(game, pos, 1, 10, alienManager);
 	}
+	public DestroyerAlien() {
+		super(null, null, 1, 10, null);
+	}
 
 	@Override
 	public boolean isOnPosition(Position position) {
@@ -18,7 +21,7 @@ public class DestroyerAlien extends AlienShip{
 
 	@Override
 	protected String getSymbol() {
-		return Messages.DESTROYER_ALIEN_SYMBOL + "[" + this.life + "]";
+		return " " +Messages.DESTROYER_ALIEN_SYMBOL + "[0" + this.life + "]";
 	}
 
 	@Override
@@ -47,4 +50,9 @@ public class DestroyerAlien extends AlienShip{
 		return bomb;
 	}
 
+	@Override
+	protected AlienShip copy(GameWorld game, Position pos, AlienManager am) {
+		return new DestroyerAlien(game, pos, am);
+	}
+	
 }

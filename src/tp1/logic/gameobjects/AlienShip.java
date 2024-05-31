@@ -54,4 +54,5 @@ public abstract class AlienShip extends EnemyShip{
 		else 
 			return false;
 	}
+	protected abstract AlienShip copy(GameWorld game, Position pos, AlienManager am);
 }

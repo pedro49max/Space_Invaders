@@ -108,4 +108,7 @@ public class UCMShip extends Ship{
 		state += NEW_LINE;
 		return state;
 	}
+	public static String allowedMoves(String separator) {
+		return "left"+separator+"lleft"+separator+"right"+separator+"rright";
+	}
 }

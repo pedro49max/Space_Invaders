@@ -136,7 +136,7 @@ public class Game implements GameStatus , GameModel, GameWorld{
 
 	@Override
 	public boolean aliensWin() {
-		return this.alienManager.touchGround();
+		return this.alienManager.touchGround() || !this.player.isAlive();
 	}
 
 	@Override

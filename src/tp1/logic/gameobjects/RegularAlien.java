@@ -10,7 +10,9 @@ public class RegularAlien extends AlienShip {
 		// TODO fill with your code
 		super(game, pos, 2, 5, alienManager);
 	}
-
+	public RegularAlien() {
+		super(null, null, 2, 5, null);
+	}
 	@Override
 	public boolean isOnPosition(Position position) {
 		return this.pos.equals(position);
@@ -18,7 +20,7 @@ public class RegularAlien extends AlienShip {
 
 	@Override
 	protected String getSymbol() {
-		return Messages.REGULAR_ALIEN_SYMBOL + "[" + this.life + "]";
+		return " " +Messages.REGULAR_ALIEN_SYMBOL + "[0" + this.life + "]";
 	}
 
 	@Override
@@ -40,6 +42,11 @@ public class RegularAlien extends AlienShip {
 	@Override
 	public void automaticMove() {
 		this.pos.move(this.move);
+	}
+
+	@Override
+	protected AlienShip copy(GameWorld game, Position pos, AlienManager am) {
+		return new RegularAlien(game, pos, am);
 	}
 
 }

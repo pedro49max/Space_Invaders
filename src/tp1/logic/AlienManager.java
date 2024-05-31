@@ -137,7 +137,7 @@ public class AlienManager  {
 		return this.remainingAliens;
 	}
 	private boolean timeToMove() {
-		return game.getCycle()%level.getNumCycles() == 0;
+		return (game.getCycle())%level.getNumCycles() == 0;
 	}
 	public void bombs(Random rand, GameObjectContainer container) {
 		for(int i = 0; i < aliens.size(); i++) {

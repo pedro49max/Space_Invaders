@@ -8,15 +8,15 @@ import tp1.view.Messages;
 public class CommandGenerator {
 
 	private static final List<Command> availableCommands = Arrays.asList(
-		new HelpCommand(),
-		new MoveCommand(),
+		new SuperLaserCommand(),
+		new Reset(),
 		new ExitCommand(),
 		new ListCommand(),
-		new Reset(),
-		new NoneCommand(),
 		new ShockWaveCommand(),
 		new ShotCommand(),
-		new SuperLaserCommand()
+		new NoneCommand(),
+		new MoveCommand(),
+		new HelpCommand()
 		//TODO fill with your code
 	);
 
@@ -36,7 +36,7 @@ public class CommandGenerator {
 		for (Command c: availableCommands) {			
 			commands.insert(0, Messages.LINE_SEPARATOR);
 			commands.insert(0, c.getHelp());
-			commands.insert(0, ": ");
+			commands.insert(0, " : ");
 			commands.insert(0, c.getDetails());
 			 //String.join(System.lineSeparator(), c.getHelp());
 			//TODO fill with your code
