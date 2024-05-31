@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import tp1.control.InitialConfiguration;
 import tp1.logic.gameobjects.DestroyerAlien;
 import tp1.logic.gameobjects.RegularAlien;
 import tp1.logic.gameobjects.UFO;
@@ -22,16 +23,15 @@ public class AlienManager  {
 		this.game = game;
 		this.level = level;
 	}
-	public  GameObjectContainer initialize() {
+	public  GameObjectContainer initialize(InitialConfiguration iniConf) {
 		this.remainingAliens = 0;
 		aliens = new ArrayList<>();
 		GameObjectContainer container = new GameObjectContainer();
-		initializeOvni(container);
-		initializeRegularAliens(container);
-		initializeDestroyerAliens(container);
-		//TODO fill with your code
-		
-		
+		if(iniConf.equals(InitialConfiguration.NONE)) {
+			initializeOvni(container);
+			initializeRegularAliens(container);
+			initializeDestroyerAliens(container);
+		}
 		return container;
 	}
 	

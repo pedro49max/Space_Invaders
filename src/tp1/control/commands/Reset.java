@@ -13,8 +13,8 @@ public class Reset extends Command{
 	List<String> Conf;
 	public Reset() {}
 
-	protected Reset(List<String> iniConf) {
-		this.Conf = iniConf;
+	protected Reset(InitialConfiguration iniConf) {
+		this.iniConf = iniConf;
 	}
 	@Override
 	protected String getName() {
@@ -38,7 +38,7 @@ public class Reset extends Command{
 
 	@Override
 	public ExecutionResult execute(GameModel game) {// throws CommandExecuteException {
-		game.resetConfiguration(Conf);
+		game.resetConfiguration(iniConf);
 		return new ExecutionResult(true);
 	}
 	public boolean matchCommandName(String name) {
@@ -48,26 +48,26 @@ public class Reset extends Command{
 	public Command parse(String[] commandWords) {// throws CommandParseException {
 		if(commandWords[0].equals(this.getShortcut()) || commandWords[0].equals(this.getName())) {
 			if(commandWords.length == 2) {
-				/*if(commandWords[1].equals("CONF_1") ||commandWords[1].equals("conf_1"))
-					this.iniConf = iniConf.CONF_1;
+				if(commandWords[1].equals("CONF_1") ||commandWords[1].equals("conf_1"))
+					this.iniConf = InitialConfiguration.CONF_1;
 				else if(commandWords[1].equals("CONF_2") ||commandWords[1].equals("conf_2"))
-					this.iniConf = iniConf.CONF_2;
+					this.iniConf = InitialConfiguration.CONF_2;
 				else if(commandWords[1].equals("CONF_3") ||commandWords[1].equals("conf_3"))
-					this.iniConf = iniConf.CONF_3;
-				else if (commandWords[1].equals("NONE") ||commandWords[1].equals("none"))
-					iniConf = iniConf.NONE;
-				else
+					this.iniConf = InitialConfiguration.CONF_3;
+				else //if (commandWords[1].equals("NONE") ||commandWords[1].equals("none"))
+					iniConf = InitialConfiguration.NONE;
+				/*else
 					throw new CommandParseException(Messages.UNKNOWN_COMMAND);*/
 				//return new Reset(InitialConfiguration.readInitialConfiguration(commandWords[1] + ".txt"));
-				return new Reset(Conf = null);
+				return new Reset(iniConf);
 			}
 			else if(commandWords.length == 1)
-				return new Reset(Conf = null);
+				return new Reset(InitialConfiguration.NONE);
 			/*else
 				throw new CommandParseException(Messages.COMMAND_PARAMETERS_MISSING);*/
 		}
 		else	
-			return new Reset(Conf = null);
+			return new Reset(InitialConfiguration.NONE);
 		return null;//Shoudn't end here
 	}
 }

@@ -47,5 +47,7 @@ public enum InitialConfiguration {
 		String allLevels = sb.toString();
 		return allLevels.substring(0, allLevels.length()-separator.length());
 	}
-	
+	public boolean equals(InitialConfiguration vonfiguration) {
+		return this == vonfiguration;
+	}
 }

@@ -42,7 +42,7 @@ public class Game implements GameStatus , GameModel, GameWorld{
 		currentCycle = 0;
 		
 		alienManager = new AlienManager(this, level);
-		container = alienManager.initialize();
+		container = alienManager.initialize(InitialConfiguration.NONE);
 		player = new UCMShip(this, new Position(DIM_X / 2, DIM_Y - 1));
 		container.add(player);
 	}
@@ -91,10 +91,10 @@ public class Game implements GameStatus , GameModel, GameWorld{
 	}
 
 	@Override
-	public void resetConfiguration(List<String> Conf) {
+	public void resetConfiguration(InitialConfiguration Conf) {
 		currentCycle = 0;		
 		alienManager = new AlienManager(this, level);
-		container = alienManager.initialize();
+		container = alienManager.initialize(Conf);
 		player = new UCMShip(this, new Position(DIM_X / 2, DIM_Y - 1));
 		container.add(player);
 	}	
