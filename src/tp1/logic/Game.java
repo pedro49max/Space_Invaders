@@ -114,6 +114,9 @@ public class Game implements GameStatus , GameModel, GameWorld{
 	public void getShockwave(boolean get) {
 		this.player.getShockwave(get);
 	}
+	public void explotion(Position _pos) {
+		this.container.explotion(_pos, this);
+	}
 	//CALLBACK METHODS
 	
 	public void addObject(GameObject object) {

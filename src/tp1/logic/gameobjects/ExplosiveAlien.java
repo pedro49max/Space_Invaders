@@ -30,6 +30,7 @@ public class ExplosiveAlien extends AlienShip{
 
 	@Override
 	public void onDelete() {
+		this.game.explotion(pos);
 		this.alienmanager.deleteAlien(this);
 		this.game.deleteObject(this);
 	}

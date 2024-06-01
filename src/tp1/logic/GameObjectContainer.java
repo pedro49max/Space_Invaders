@@ -56,7 +56,6 @@ public class GameObjectContainer {
 	}
 
 	public void shockWave(Game game) {
-		ShockWave sw;
 		List<GameObject> objectives = new ArrayList<>();
 		for (int i=0;i<objects.size();i++) {
 			GameObject object = objects.get(i);
@@ -64,6 +63,24 @@ public class GameObjectContainer {
 				objectives.add(object);
 			}				
 		}
+		this.massAtack(objectives, game);
+	}
+	public void  explotion(Position pos, Game game) {
+		List<Position> explotionPositions = pos.explotionPos();
+		List<GameObject> objectives = new ArrayList<>();
+		for (int i=0;i<objects.size();i++) {
+			GameObject object = objects.get(i);
+			for(int j = 0; j < explotionPositions.size(); j++){
+				Position position = explotionPositions.get(j);
+				if(object.isOnPosition(position)) {
+					objectives.add(object);
+				}
+			}
+		}
+		this.massAtack(objectives, game);
+	}
+	private void massAtack(List<GameObject> objectives, Game game) {
+		ShockWave sw;//Use shockwave because it acts similar
 		for(int i = 0; i < objectives.size(); i++) {
 			GameObject object = objectives.get(i);
 			sw = new ShockWave(game, object.clonePos());			
