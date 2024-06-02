@@ -1,5 +1,7 @@
 package tp1.control.commands;
 
+import tp1.control.CommandParseException;
+import tp1.view.Messages;
 
 public abstract class NoParamsCommand extends Command {
 	ExitCommand exit;
@@ -13,7 +15,7 @@ public abstract class NoParamsCommand extends Command {
 	
 	
 	@Override
-	public Command parse(String[] commandWords) {
+	public Command parse(String[] commandWords) throws CommandParseException{
 		exit = new ExitCommand();
 		help = new HelpCommand();
 		list =  new ListCommand();
@@ -37,8 +39,8 @@ public abstract class NoParamsCommand extends Command {
 	 				return new SuperLaserCommand();
 	 			else if(commandWords[0].equals(none.getShortcut()) || commandWords[0].equals(none.getName()) || commandWords[0].equals(""))
 	 				return new NoneCommand();
-	 			/*else
-	 				throw new CommandParseException(Messages.UNKNOWN_COMMAND);*/
+	 			else
+	 				throw new CommandParseException(Messages.UNKNOWN_COMMAND);
 	 		}	 			
 	 		/*else
 	 			throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);*/

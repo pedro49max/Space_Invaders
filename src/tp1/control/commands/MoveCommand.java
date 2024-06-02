@@ -1,5 +1,7 @@
 package tp1.control.commands;
 
+import tp1.control.CommandExecuteException;
+import tp1.control.CommandParseException;
 import tp1.control.ExecutionResult;
 import tp1.control.GameModel;
 import tp1.logic.Game;
@@ -36,14 +38,13 @@ public class MoveCommand extends Command {
 	}
 
 	@Override
-	public ExecutionResult execute(GameModel game) {
-		game.move(move);
-		return new ExecutionResult(true);
+	public boolean execute(GameModel game)  throws CommandExecuteException{
+		return game.move(move);
 	}
 
 
 	@Override
-	public Command parse(String[] commandWords) {
+	public Command parse(String[] commandWords) throws CommandParseException{
 		if(commandWords[0].equals(this.getShortcut()) || commandWords[0].equals(this.getName())) {	
 			if(commandWords.length == 2) {
 				if(commandWords[1].equals("l") || commandWords[1].equals("left"))
@@ -60,12 +61,12 @@ public class MoveCommand extends Command {
 					this.move = Move.UP;
 				else if(commandWords[1].equals("down") || commandWords[1].equals("DOWN"))
 					this.move = Move.DOWN;
-				/*else 
-					throw new CommandParseException(Messages.UNKNOWN_COMMAND);*/
+				else 
+					throw new IllegalArgumentException(Messages.UNKNOWN_COMMAND);
 				return new MoveCommand(this.move);
 			}
-			/*else
-				throw new CommandParseException(Messages.COMMAND_PARAMETERS_MISSING);*/
+			else
+				throw new CommandParseException(Messages.COMMAND_PARAMETERS_MISSING);
 		}
 			
 		return new NoneCommand();

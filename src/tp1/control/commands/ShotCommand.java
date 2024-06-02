@@ -1,5 +1,6 @@
 package tp1.control.commands;
 
+import tp1.control.CommandExecuteException;
 import tp1.control.ExecutionResult;
 import tp1.control.GameModel;
 import tp1.view.Messages;
@@ -27,9 +28,9 @@ public class ShotCommand  extends NoParamsCommand {
 	}
 
 	@Override
-	public ExecutionResult execute(GameModel game) {// throws CommandExecuteException {
+	public boolean execute(GameModel game)  throws CommandExecuteException {
 		game.shootLaser(false);
-		return new ExecutionResult(true);
+		return 	true;
 	}
 	public boolean matchCommandName(String name) {
 		return super.matchCommandName(name);

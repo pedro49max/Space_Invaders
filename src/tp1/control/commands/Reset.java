@@ -2,6 +2,8 @@ package tp1.control.commands;
 
 import java.util.List;
 
+import tp1.control.CommandExecuteException;
+import tp1.control.CommandParseException;
 import tp1.control.ExecutionResult;
 import tp1.control.GameModel;
 import tp1.control.InitialConfiguration;
@@ -37,15 +39,14 @@ public class Reset extends Command{
 	}
 
 	@Override
-	public ExecutionResult execute(GameModel game) {// throws CommandExecuteException {
-		game.resetConfiguration(iniConf);
-		return new ExecutionResult(true);
+	public boolean execute(GameModel game)  throws CommandExecuteException {		
+		return game.resetConfiguration(iniConf);
 	}
 	public boolean matchCommandName(String name) {
 		return super.matchCommandName(name);
 	}
 	
-	public Command parse(String[] commandWords) {// throws CommandParseException {
+	public Command parse(String[] commandWords) throws CommandParseException {
 		if(commandWords[0].equals(this.getShortcut()) || commandWords[0].equals(this.getName())) {
 			if(commandWords.length == 2) {
 				
@@ -56,20 +57,19 @@ public class Reset extends Command{
 				}
 				else if(commandWords[1].equals("CONF_3") ||commandWords[1].equals("conf_3"))
 					this.iniConf = InitialConfiguration.CONF_3;
-				else //if (commandWords[1].equals("NONE") ||commandWords[1].equals("none"))
+				else if (commandWords[1].equals("NONE") ||commandWords[1].equals("none"))
 					iniConf = InitialConfiguration.NONE;
-				/*else
-					throw new CommandParseException(Messages.UNKNOWN_COMMAND);*/
+				else
+					throw new CommandParseException(Messages.UNKNOWN_COMMAND);
 				//return new Reset(InitialConfiguration.readInitialConfiguration(commandWords[1] + ".txt"));
 				return new Reset(iniConf);
 			}
 			else if(commandWords.length == 1)
 				return new Reset(InitialConfiguration.NONE);
-			/*else
-				throw new CommandParseException(Messages.COMMAND_PARAMETERS_MISSING);*/
+			else
+				throw new CommandParseException(Messages.COMMAND_PARAMETERS_MISSING);
 		}
 		else	
 			return new Reset(InitialConfiguration.NONE);
-		return null;//Shoudn't end here
 	}
 }

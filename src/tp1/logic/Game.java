@@ -3,6 +3,7 @@ package tp1.logic;
 import java.util.List;
 import java.util.Random;
 
+import tp1.control.CommandExecuteException;
 import tp1.control.GameModel;
 import tp1.control.InitialConfiguration;
 import tp1.logic.gameobjects.GameObject;
@@ -71,12 +72,12 @@ public class Game implements GameStatus , GameModel, GameWorld{
 	    this.container.computeractionsAfterMoving();//all damage makes sense to implement it after movement
 	}	
 	@Override
-	public boolean move(Move move) {
+	public boolean move(Move move){
 		return this.player.move(move);
 	}
 
 	@Override
-	public boolean shootLaser(boolean superLaser) {
+	public void shootLaser(boolean superLaser){
 		if(this.player.getcanShot()) {
 			if(!superLaser)
 				this.container.add(new UCMLaser(this, player));
@@ -87,15 +88,17 @@ public class Game implements GameStatus , GameModel, GameWorld{
 		else
 			return false;
 	}
-	public void shockWaveDrop() {
+	public boolean shockWaveDrop(){
 		if(player.checkSockwave()) {
 			this.getShockwave(false);
-			this.container.shockWave(this);			
+			this.container.shockWave(this);	
+			return true;
 		}
+		else return false;
 	}
 
 	@Override
-	public void resetConfiguration(InitialConfiguration Conf) {
+	public boolean resetConfiguration(InitialConfiguration Conf){
 		currentCycle = 0;		
 		alienManager = new AlienManager(this, level);
 		container = alienManager.initialize(Conf);

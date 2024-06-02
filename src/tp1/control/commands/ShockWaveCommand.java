@@ -1,5 +1,6 @@
 package tp1.control.commands;
 
+import tp1.control.CommandExecuteException;
 import tp1.control.ExecutionResult;
 import tp1.control.GameModel;
 import tp1.view.Messages;
@@ -26,9 +27,8 @@ public class ShockWaveCommand extends NoParamsCommand{
 	}
 
 	@Override
-	public ExecutionResult execute(GameModel game){// throws CommandExecuteException{
-		game.shockWaveDrop();
-		return new ExecutionResult(true);
+	public boolean execute(GameModel game) throws CommandExecuteException{
+		return game.shockWaveDrop();
 	}
 	public boolean matchCommandName(String name) {
 		return super.matchCommandName(name);

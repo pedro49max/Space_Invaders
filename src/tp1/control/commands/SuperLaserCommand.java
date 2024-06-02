@@ -1,14 +1,15 @@
 package tp1.control.commands;
 
+import tp1.control.CommandExecuteException;
 import tp1.control.ExecutionResult;
 import tp1.control.GameModel;
 import tp1.view.Messages;
 
 public class SuperLaserCommand extends NoParamsCommand{
 	@Override
-	public ExecutionResult execute(GameModel game) {// throws CommandExecuteException{
+	public boolean execute(GameModel game)  throws CommandExecuteException{
 		game.shootLaser(true);
-		return new ExecutionResult(true);
+		return 	true;
 	}
 
 	@Override

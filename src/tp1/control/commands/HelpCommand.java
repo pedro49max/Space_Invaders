@@ -27,10 +27,10 @@ public class HelpCommand extends NoParamsCommand {
 	}
 
 	@Override
-	public ExecutionResult execute(GameModel game) {
+	public boolean execute(GameModel game) {
 		System.out.println(Messages.HELP_AVAILABLE_COMMANDS);
 		System.out.println(CommandGenerator.commandHelp());
-		return new ExecutionResult(false);
+		return false;
 	}
 	public boolean matchCommandName(String name) {
 		return super.matchCommandName(name);

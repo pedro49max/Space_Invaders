@@ -26,8 +26,8 @@ public class NoneCommand  extends NoParamsCommand{
 	}
 
 	@Override
-	public ExecutionResult execute(GameModel game) {//throws CommandExecuteException {
-		return new ExecutionResult(true);
+	public boolean execute(GameModel game) {//throws CommandExecuteException {
+		return true;
 	}
 	public boolean matchCommandName(String name) {
 		return super.matchCommandName(name);

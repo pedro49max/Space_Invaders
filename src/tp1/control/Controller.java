@@ -45,21 +45,23 @@ public class Controller {
 	public void run() {
 		printGame();
 		while (!game.isFinished()) {
-			String[] parameters = prompt();
-			Command command = CommandGenerator.parse(parameters);
+			try {
+				String[] parameters = prompt();
+				Command command = CommandGenerator.parse(parameters);
 
-			if (command != null) {
-				ExecutionResult result = command.execute(game);
-				if (result.success()) {
-					if (result.draw()) {
+				if (command != null) {
+					boolean result = command.execute(game);
+					if (result) {
 						this.game.update();
 						printGame();
 					}						
-				} 
-				else
-					System.out.println(result.errorMessage());
-			} else {
-				System.out.println(Messages.UNKNOWN_COMMAND);
+				}
+			}
+			catch (CommandParseException | CommandExecuteException e) {
+				System.out.println(e.getMessage());
+				Throwable cause = e.getCause();
+				if (cause != null) 
+				    System.out.println(cause.getMessage());
 			}
 		}
 

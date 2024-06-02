@@ -26,10 +26,10 @@ public class ListCommand extends NoParamsCommand {
 	}
 
 	@Override
-	public ExecutionResult execute(GameModel game) {// throws CommandExecuteException{
+	public boolean execute(GameModel game) {// throws CommandExecuteException{
 		//System.out.println(Messages.HELP_AVAILABLE_COMMANDS);
 		System.out.println(CommandGenerator.commandList());
-		return new ExecutionResult(false);
+		return false;
 	}
 	public boolean matchCommandName(String name) {
 		return super.matchCommandName(name);
