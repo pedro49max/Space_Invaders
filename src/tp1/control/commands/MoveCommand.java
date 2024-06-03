@@ -62,11 +62,13 @@ public class MoveCommand extends Command {
 				else if(commandWords[1].equals("down") || commandWords[1].equals("DOWN"))
 					this.move = Move.DOWN;
 				else 
-					throw new IllegalArgumentException(Messages.UNKNOWN_COMMAND);
+					throw new IllegalArgumentException("Wrong direction: " + commandWords[1] + Messages.LINE_SEPARATOR + Messages.ALLOWED_MOVES_MESSAGE);
 				return new MoveCommand(this.move);
 			}
-			else
+			else if(commandWords.length == 1)
 				throw new CommandParseException(Messages.COMMAND_PARAMETERS_MISSING);
+			else
+				throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
 		}
 			
 		return new NoneCommand();

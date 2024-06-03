@@ -1,5 +1,9 @@
 package tp1.control;
 
-public class GameModelException extends CommandExecuteException{
+public abstract class GameModelException extends CommandExecuteException{
+
+	public GameModelException(String string) {
+		super(string);
+	}
 
 }

@@ -1,5 +1,12 @@
 package tp1.control;
 
-public class CommandExecuteException extends Throwable{
+public abstract class CommandExecuteException extends Throwable{
+	private String error;
+	public CommandExecuteException(String string) {
+		this.error = string;
+	}
+	public String getMessage() {
+		return error;
+	}
 
 }

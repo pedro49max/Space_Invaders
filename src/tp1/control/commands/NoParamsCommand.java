@@ -42,8 +42,8 @@ public abstract class NoParamsCommand extends Command {
 	 			else
 	 				throw new CommandParseException(Messages.UNKNOWN_COMMAND);
 	 		}	 			
-	 		/*else
-	 			throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);*/
+	 		else
+	 			throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
 	 	}
 	 	return null;
 	}

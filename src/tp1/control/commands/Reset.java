@@ -1,5 +1,7 @@
 package tp1.control.commands;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import tp1.control.CommandExecuteException;
@@ -49,25 +51,17 @@ public class Reset extends Command{
 	public Command parse(String[] commandWords) throws CommandParseException {
 		if(commandWords[0].equals(this.getShortcut()) || commandWords[0].equals(this.getName())) {
 			if(commandWords.length == 2) {
-				
-				if(commandWords[1].equals("CONF_1") ||commandWords[1].equals("conf_1"))
-					this.iniConf = InitialConfiguration.CONF_1;
-				else if(commandWords[1].equals("CONF_2") ||commandWords[1].equals("conf_2")) {
-					this.iniConf = InitialConfiguration.CONF_2;
+				try {
+					this.iniConf = InitialConfiguration.readFromFile(commandWords[1]);
+				} catch (IOException e) {
+					throw new CommandParseException(Messages.FILE_NOT_FOUND);
 				}
-				else if(commandWords[1].equals("CONF_3") ||commandWords[1].equals("conf_3"))
-					this.iniConf = InitialConfiguration.CONF_3;
-				else if (commandWords[1].equals("NONE") ||commandWords[1].equals("none"))
-					iniConf = InitialConfiguration.NONE;
-				else
-					throw new CommandParseException(Messages.UNKNOWN_COMMAND);
-				//return new Reset(InitialConfiguration.readInitialConfiguration(commandWords[1] + ".txt"));
 				return new Reset(iniConf);
 			}
 			else if(commandWords.length == 1)
 				return new Reset(InitialConfiguration.NONE);
 			else
-				throw new CommandParseException(Messages.COMMAND_PARAMETERS_MISSING);
+				throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
 		}
 		else	
 			return new Reset(InitialConfiguration.NONE);

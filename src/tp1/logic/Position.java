@@ -43,4 +43,7 @@ public class Position {
 		}
 		return positions;
 	}
+	public String toString() {
+		return "(" + this.col + ", " + this.row +")";
+	}
 }

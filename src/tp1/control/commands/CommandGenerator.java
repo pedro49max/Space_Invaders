@@ -49,15 +49,15 @@ public class CommandGenerator {
 	}
 	public static String commandList() {
 		StringBuilder commands = new StringBuilder();	
-		commands.insert(0,"[U]CM Ship: damage='1', endurance='3'");
-		commands.insert(0, Messages.LINE_SEPARATOR);
 		commands.insert(0,"[R]egular Alien: points='5', damage='0', endurance='2'");
 		commands.insert(0, Messages.LINE_SEPARATOR);
 		commands.insert(0,"[D]estroyer Alien: points='10', damage='1', endurance='1'");
 		commands.insert(0, Messages.LINE_SEPARATOR);
-		commands.insert(0,"U[f]o: points='25', damage='0', endurance='1'");
-		commands.insert(0, Messages.LINE_SEPARATOR);
 		commands.insert(0,"[E]xplosive Alien: points='12', damage='0', endurance='2'");
+		commands.insert(0, Messages.LINE_SEPARATOR);
+		commands.insert(0,"[U]CM Ship: damage='1', endurance='3'");
+		commands.insert(0, Messages.LINE_SEPARATOR);
+		commands.insert(0,"U[f]o: points='25', damage='0', endurance='1'");
 		commands.insert(0, Messages.LINE_SEPARATOR);
 			//TODO fill with your cod
 		return commands.toString();

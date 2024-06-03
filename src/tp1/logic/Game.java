@@ -6,6 +6,12 @@ import java.util.Random;
 import tp1.control.CommandExecuteException;
 import tp1.control.GameModel;
 import tp1.control.InitialConfiguration;
+import tp1.control.InitializationException;
+import tp1.control.LaserInFlightException;
+import tp1.control.NoShockWaveException;
+import tp1.control.NotAllowedMoveException;
+import tp1.control.NotEnoughtPointsException;
+import tp1.control.OffWorldException;
 import tp1.logic.gameobjects.GameObject;
 import tp1.logic.gameobjects.GameWorld;
 import tp1.logic.gameobjects.ShockWave;
@@ -38,13 +44,17 @@ public class Game implements GameStatus , GameModel, GameWorld{
 		initGame();
 	}
 		
-	private void initGame () {	
+	private void initGame () {
 		this.rand= new Random(seed);
 		doExit = false;
 		currentCycle = 0;
 		
 		alienManager = new AlienManager(this, level);
-		container = alienManager.initialize(InitialConfiguration.NONE);
+		try {
+			container = alienManager.initialize(InitialConfiguration.NONE, false);
+		} catch (InitializationException e) {//shoudn't be needed
+			e.printStackTrace();
+		}
 		player = new UCMShip(this, new Position(DIM_X / 2, DIM_Y - 1));
 		container.add(player);
 	}
@@ -72,38 +82,46 @@ public class Game implements GameStatus , GameModel, GameWorld{
 	    this.container.computeractionsAfterMoving();//all damage makes sense to implement it after movement
 	}	
 	@Override
-	public boolean move(Move move){
+	public boolean move(Move move)  throws OffWorldException, NotAllowedMoveException{
 		return this.player.move(move);
 	}
 
 	@Override
-	public void shootLaser(boolean superLaser){
+	public void shootLaser(boolean superLaser)throws LaserInFlightException, NotEnoughtPointsException{
 		if(this.player.getcanShot()) {
 			if(!superLaser)
 				this.container.add(new UCMLaser(this, player));
-			else if(this.player.canShotSuperLaser())
-				this.container.add(new UCMSuperLaser(this, player));
-			return true;
+			else {
+				if(this.player.canShotSuperLaser())
+					this.container.add(new UCMSuperLaser(this, player));
+				else
+					throw new NotEnoughtPointsException(this.player.points());
+			}
+				
 		}
 		else
-			return false;
+			throw new LaserInFlightException();
 	}
-	public boolean shockWaveDrop(){
+	public boolean shockWaveDrop()throws NoShockWaveException{
 		if(player.checkSockwave()) {
 			this.getShockwave(false);
 			this.container.shockWave(this);	
 			return true;
 		}
-		else return false;
+		else {
+			throw new NoShockWaveException();
+		}
 	}
 
 	@Override
-	public boolean resetConfiguration(InitialConfiguration Conf){
-		currentCycle = 0;		
+	public boolean resetConfiguration(InitialConfiguration Conf) throws InitializationException{
+		currentCycle = 0;
+		boolean good = false;
 		alienManager = new AlienManager(this, level);
-		container = alienManager.initialize(Conf);
+		container = alienManager.initialize(Conf, good);
 		player = new UCMShip(this, new Position(DIM_X / 2, DIM_Y - 1));
 		container.add(player);
+		return good;
 	}	
 	//GameWorld Methods
 	

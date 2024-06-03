@@ -1,5 +1,7 @@
 package tp1.logic.gameobjects;
 
+import tp1.control.NotAllowedMoveException;
+import tp1.control.OffWorldException;
 import tp1.logic.Game;
 import tp1.logic.Move;
 import tp1.logic.Position;
@@ -52,22 +54,23 @@ public class UCMShip extends Ship{
 		return 0;//gives no points when hit by UCMWeapon, because it can't get hit by it
 	}
 
-	public boolean move(Move move) {
+	public boolean move(Move move)  throws OffWorldException, NotAllowedMoveException{
 		if(move.equals(Move.LEFT)&& pos.getCol() == 0)
-			return false;
+			throw new OffWorldException(move, this.pos);
 		else if(move.equals(Move.LLEFT)&& pos.getCol() == 1)
-			return false;
+			throw new OffWorldException(move, this.pos);
 		else if(move.equals(Move.RRIGHT)&& pos.getCol() == Game.DIM_X-2)
-			return false;
+			throw new OffWorldException(move, this.pos);
 		else if(move.equals(Move.RIGHT)&& pos.getCol() == Game.DIM_X -1)
-			return false;
+			throw new OffWorldException(move, this.pos);
 		else if(move.equals(Move.DOWN))
-			return false;
+			throw new NotAllowedMoveException(move);
 		else if(move.equals(Move.UP))
-			return false;
-		else
+			throw new NotAllowedMoveException(move);
+		else {
 			this.pos.move(move);
-		return false;
+			return true;
+		}	
 	}
 	public boolean getcanShot() {
 		if(this.canShot) {

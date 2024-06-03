@@ -5,5 +5,7 @@ public class CommandParseException extends Throwable{
 	public CommandParseException(String unknownCommand) {
 		this.error = unknownCommand;
 	}
-
+	public String getMessage() {
+		return error;
+	}
 }
