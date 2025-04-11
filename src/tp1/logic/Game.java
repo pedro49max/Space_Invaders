@@ -116,7 +116,7 @@ public class Game implements GameStatus , GameModel, GameWorld{
 	@Override
 	public boolean resetConfiguration(InitialConfiguration Conf) throws InitializationException{
 		currentCycle = 0;
-		boolean good = false;
+		boolean good = true;
 		alienManager = new AlienManager(this, level);
 		container = alienManager.initialize(Conf, good);
 		player = new UCMShip(this, new Position(DIM_X / 2, DIM_Y - 1));

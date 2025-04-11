@@ -40,7 +40,5 @@ public class InitialConfiguration {
         } 
         return CUSTOM;
 	}
-	public boolean equals(InitialConfiguration vonfiguration) {
-		return this == vonfiguration;
-	}
+
 }
